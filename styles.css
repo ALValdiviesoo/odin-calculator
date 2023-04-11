@@ -4,10 +4,71 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+.topSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 292px;
+}
+
+.screen {
+  width: 230px;
+  height: 60px;
+  border: black solid 1px;
+  display: flex;
+  flex-direction: column;
+}
+
+.previousScreen {
+  height: 25px;
+}
+
+.currentScreen {
+  height: 35px;
+}
+
+button {
+  height: 60px;
+  width: 60px;
+  font-size: 20px;
+  margin: 5px 5px;
+  color: white;
+  font-weight: bold;
+  background-color: transparent;
+  border-radius: 6px;
+}
+
+.calculator {
+  background-color: wheat;
+  width: 320px;
+  height: 370px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.number {
+  border: 2px greenyellow solid;
+}
+
+.operator {
+  border: 2px orange solid;
+}
+
+.equals, .clear {
+  border: 2px red solid;
+}
+
+.decimal {
+  border: 2px blue solid;
 }
