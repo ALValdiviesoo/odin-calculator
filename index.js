@@ -21,6 +21,8 @@ number.forEach((num) => {
   })
 })
 
+console.log("test");
+
 clear.onclick = () => {
   currentNumber = "";
   currentScreen.textContent = currentNumber;
