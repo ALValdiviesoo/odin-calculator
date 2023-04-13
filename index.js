@@ -22,16 +22,42 @@ number.forEach((num) => {
 })
 
 clear.onclick = () => {
-  currentScreen.textContent = "";
+  currentNumber = "";
+  currentScreen.textContent = currentNumber;
 }
 
 operators.forEach((ope) => {
   ope.addEventListener("mousedown", () => {
     operator = ope.textContent;
-    console.log(operator);
     previousNumber = currentScreen.textContent;
     previousScreen.textContent = `${previousNumber} ${operator}`;
-    currentNumber = ""
+    currentNumber = "";
     currentScreen.textContent = currentNumber;
   })
 })
+
+equal.onclick = () => {
+  currentNumber = currentScreen.textContent;
+
+  switch(operator) {
+    case 'x':
+      previousScreen.textContent = "";
+      currentScreen.textContent = (Number(currentNumber) * Number(previousNumber));
+      break;
+
+    case '-':
+      previousScreen.textContent = "";
+      currentScreen.textContent = (Number(previousNumber) - Number(currentNumber));
+      break;
+
+    case '+':
+      previousScreen.textContent = "";
+      currentScreen.textContent = (Number(currentNumber) + Number(previousNumber));
+      break;
+
+    case '/':
+      previousScreen.textContent = "";
+      currentScreen.textContent = (Number(previousNumber) / Number(currentNumber));
+      break;
+  }
+}
