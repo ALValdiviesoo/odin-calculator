@@ -15,15 +15,15 @@ body {
 
 .topSection {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  width: 292px;
+  width: 320px;
 }
 
 .screen {
-  width: 230px;
+  width: 235px;
   height: 60px;
-  border: black solid 1px;
+  border: black solid 2px;
   display: flex;
   flex-direction: column;
 }
@@ -37,8 +37,8 @@ body {
 }
 
 button {
-  height: 60px;
-  width: 60px;
+  height: 70px;
+  width: 70px;
   font-size: 20px;
   margin: 5px 5px;
   color: white;
@@ -48,9 +48,9 @@ button {
 }
 
 .calculator {
-  background-color: wheat;
-  width: 320px;
-  height: 370px;
+  background-image: linear-gradient(to bottom, dodgerblue, black);
+  width: 370px;
+  height: 420px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -59,16 +59,45 @@ button {
 
 .number {
   border: 2px greenyellow solid;
+  transition: all 0.15s;
 }
 
 .operator {
   border: 2px orange solid;
+  transition: all 0.15s;
 }
 
 .equals, .clear {
   border: 2px red solid;
+  transition: all 0.15s;
 }
 
 .decimal {
   border: 2px blue solid;
+  transition: all 0.15s;
+}
+
+.clear {
+  margin-right: 0px;
+}
+
+.title {
+  margin-bottom: 15px;
+  font-size: 35px;
+}
+
+.number:hover {
+  background-color: greenyellow;
+}
+
+.operator:hover {
+  background-color: orange;
+}
+
+.equals:hover, .clear:hover {
+  background-color: red;
+}
+
+.decimal:hover {
+  background-color: blue;
 }
