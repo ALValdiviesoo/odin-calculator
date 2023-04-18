@@ -1,63 +1,103 @@
-let currentNumber = "";
-let previousNumber = "";
+let currentNum = "";
+let previousNum = "";
 let operator = "";
 
-let clear = document.querySelector('.clear');
-let equal = document.querySelector('.equals');
-let decimal = document.querySelector('.decimal');
+document.addEventListener("DOMContentLoaded", () => {
+  let clear = document.querySelector(".clear");
+  let equals = document.querySelector(".equals");
+  let decimal = document.querySelector(".decimal");
 
-let number = document.querySelectorAll('.number');
-let operators = document.querySelectorAll('.operator');
+  let numbers = document.querySelectorAll(".number");
+  let operators = document.querySelectorAll(".operator");
 
-let previousScreen = document.querySelector('.previousScreen');
-let currentScreen = document.querySelector('.currentScreen');
+  let currentScreen = document.querySelector(".currentScreen");
+  let previousScreen = document.querySelector(".previousScreen");
 
-number.forEach((num) => {
-  num.addEventListener("mousedown", () => {
-    if (currentNumber.length < 6) {
-      currentNumber += num.textContent;
-      currentScreen.textContent = currentNumber;
-    } 
+  numbers.forEach((num) => num.addEventListener("click", (e) => {
+    handleNum(e.target.textContent);
+    currentScreen.textContent = currentNum;
+  }))
+
+  operators.forEach((op) => op.addEventListener("click", (e) => {
+    handleOperator(e.target.textContent);
+    previousScreen.textContent = `${previousNum} ${operator}`;
+    currentScreen.textContent = currentNum;
+  })) 
+
+  clear.addEventListener("click", () => {
+    currentNum = "";
+    previousNum = "";
+    operator = "";
+
+    currentScreen.textContent = currentNum;
+    previousScreen.textContent = previousNum;
+  })
+
+  equals.addEventListener("click", () => {
+    if(currentNum != "" && previousNum != "") {
+      operate();
+      previousScreen.textContent = "";
+      if(previousNum.length <= 7) {
+        currentScreen.textContent = previousNum;
+      } else {
+        currentScreen.textContent = previousNum.slice(0, 5) + "...";
+      }
+    }
+  })
+
+  decimal.addEventListener("click", () => {
+    addDecimal();
+    currentScreen.textContent = currentNum;
   })
 })
 
-clear.onclick = () => {
-  currentNumber = "";
-  currentScreen.textContent = currentNumber;
+function handleNum(number) {
+  if(currentNum.length <= 5) {
+    currentNum += number;
+  }
 }
 
-operators.forEach((ope) => {
-  ope.addEventListener("mousedown", () => {
-    operator = ope.textContent;
-    previousNumber = currentScreen.textContent;
-    previousScreen.textContent = `${previousNumber} ${operator}`;
-    currentNumber = "";
-    currentScreen.textContent = currentNumber;
-  })
-})
+function handleOperator(op) {
+  operator = op;
+  previousNum = currentNum;
+  currentNum = "";
+}
 
-equal.onclick = () => {
-  currentNumber = currentScreen.textContent;
+function operate() {
+  previousNum = Number(previousNum);
+  currentNum = Number(currentNum);
 
   switch(operator) {
-    case 'x':
-      previousScreen.textContent = "";
-      currentScreen.textContent = (Number(currentNumber) * Number(previousNumber));
+    case "+":
+      previousNum += currentNum;
       break;
 
-    case '-':
-      previousScreen.textContent = "";
-      currentScreen.textContent = (Number(previousNumber) - Number(currentNumber));
+    case "-":
+      previousNum -= currentNum;
       break;
+    
+    case "/":
+      previousNum /= currentNum;
+    break;
 
-    case '+':
-      previousScreen.textContent = "";
-      currentScreen.textContent = (Number(currentNumber) + Number(previousNumber));
-      break;
+    case "x":
+      previousNum *= currentNum;
+  }
 
-    case '/':
-      previousScreen.textContent = "";
-      currentScreen.textContent = (Number(previousNumber) / Number(currentNumber));
-      break;
+  previousNum = roundNum(previousNum);
+  previousNum = previousNum.toString();
+  currentNum = previousNum.toString();
+}
+
+function roundNum(num) {
+  return Math.round(num * 1000) / 1000;
+}
+
+function addDecimal() {
+  if (currentNum == "") {
+    currentNum += "0.";
+  }
+  if (!currentNum.includes(".")) {
+    currentNum += ".";
   }
 }
