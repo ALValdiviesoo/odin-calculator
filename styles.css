@@ -26,6 +26,9 @@ body {
   border: black solid 2px;
   display: flex;
   flex-direction: column;
+  color: white;
+  text-align: right;
+  font-weight: bold;
 }
 
 .previousScreen {
