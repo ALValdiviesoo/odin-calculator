@@ -19,9 +19,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }))
 
   operators.forEach((op) => op.addEventListener("click", (e) => {
-    handleOperator(e.target.textContent);
-    previousScreen.textContent = `${previousNum} ${operator}`;
-    currentScreen.textContent = currentNum;
+    if (!(currentNum == "")) {
+      handleOperator(e.target.textContent);
+      previousScreen.textContent = `${previousNum} ${operator}`;
+      currentScreen.textContent = currentNum;
+    }
   })) 
 
   clear.addEventListener("click", () => {
